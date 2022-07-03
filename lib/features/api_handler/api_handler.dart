@@ -1,11 +1,11 @@
 library api_handler;
 
-import 'package:api_handler/core/token/token.dart';
-import 'package:api_handler/features/api_handler/data/enums/header_enum.dart';
-import 'package:api_handler/features/api_handler/data/enums/response_enum.dart';
 
+import '../../core/token/token.dart';
+import 'data/enums/header_enum.dart';
 import '../../core/api_data/api_data.dart';
 import '../../core/api_method/api_method.dart';
+import 'data/enums/response_enum.dart';
 import 'data/models/response_model.dart';
 
 class APIHandler {

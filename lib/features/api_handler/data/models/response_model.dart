@@ -4,7 +4,6 @@ class ResponseModel {
   String message;
   dynamic data;
 
-
   ResponseModel({
     this.isSuccess = false,
     this.statusCode = "",
@@ -20,5 +19,6 @@ class ResponseModel {
 
     return this;
   }
-
 }
+
+

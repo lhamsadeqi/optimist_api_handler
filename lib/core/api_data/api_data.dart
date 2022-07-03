@@ -68,3 +68,5 @@ class PostApiData implements ApiData {
     required this.responseEnum,
   });
 }
+
+
