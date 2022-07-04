@@ -65,6 +65,7 @@ class RemoteDataApiFuncImpl extends RemoteDataApiFunc {
               Uri.parse(ApiHelperMethodsImpl()
                   .urlGenerator(url, query, pathVariable)),
               headers: ApiHelperMethodsImpl().headerGetter(headerType),
+              body: body,
             )
             .timeout(const Duration(seconds: RemoteDataApiFunc._timeout));
         responseModel =
@@ -167,6 +168,7 @@ class RemoteDataApiFuncImpl extends RemoteDataApiFunc {
               Uri.parse(ApiHelperMethodsImpl()
                   .urlGenerator(url, query, pathVariable)),
               headers: ApiHelperMethodsImpl().headerGetter(headerType),
+              body: body,
             )
             .timeout(const Duration(seconds: RemoteDataApiFunc._timeout));
         responseModel =
@@ -219,6 +221,7 @@ class RemoteDataApiFuncImpl extends RemoteDataApiFunc {
               Uri.parse(ApiHelperMethodsImpl()
                   .urlGenerator(url, query, pathVariable)),
               headers: ApiHelperMethodsImpl().headerGetter(headerType),
+              body: body,
             )
             .timeout(const Duration(seconds: RemoteDataApiFunc._timeout));
         responseModel =
