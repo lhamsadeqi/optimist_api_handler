@@ -8,6 +8,7 @@ abstract class ApiData {
   ResponseEnum responseEnum;
   List<QueryModel>? queries;
   String? pathVars;
+
   ApiData(
     this.url, {
     this.queries,
@@ -59,6 +60,7 @@ class PostApiData implements ApiData {
   ResponseEnum responseEnum;
 
   dynamic body;
+
   PostApiData(
     this.url, {
     this.body,
@@ -69,4 +71,58 @@ class PostApiData implements ApiData {
   });
 }
 
+class PutApiData implements ApiData {
+  @override
+  late String url;
 
+  @override
+  HeaderEnum headerEnum;
+
+  @override
+  String? pathVars;
+
+  @override
+  List<QueryModel>? queries;
+
+  @override
+  ResponseEnum responseEnum;
+
+  dynamic body;
+
+  PutApiData(
+    this.url, {
+    this.body,
+    required this.headerEnum,
+    this.pathVars,
+    this.queries,
+    required this.responseEnum,
+  });
+}
+
+class DeleteApiData implements ApiData {
+  @override
+  late String url;
+
+  @override
+  HeaderEnum headerEnum;
+
+  @override
+  String? pathVars;
+
+  @override
+  List<QueryModel>? queries;
+
+  @override
+  ResponseEnum responseEnum;
+
+  dynamic body;
+
+  DeleteApiData(
+    this.url, {
+    this.body,
+    required this.headerEnum,
+    this.pathVars,
+    this.queries,
+    required this.responseEnum,
+  });
+}

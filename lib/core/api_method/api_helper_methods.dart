@@ -56,11 +56,11 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
 
   @override
   String urlGenerator(
-      String url, List<QueryModel> query, String? pathVariable) {
+      String url, List<QueryModel>? query, String? pathVariable) {
     if (pathVariable != null) url += "/$pathVariable";
-    var queryPart = generateQuery(query);
+    if (pathVariable != null) url += generateQuery(query!);
 
-    return "$url$queryPart";
+    return url;
   }
 
   responseGetter<T>(ResponseEnum typeEnum, http.Response response) {
@@ -83,14 +83,18 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
                 ResponseModel(
                   statusCode: result.statusCode,
                   isSuccess: result.isSuccess,
-                  data: result.data.toString(),
+                  data: result.data,
                   message: result.message,
                 ),
                 response.request!.url.path);
           }
           if (data.isEmpty) {
-            printError('Url: ${response.request!.url.path}');
-            printError('Data: $data');
+            ApiFailure().call(
+                ResponseModel(
+                  data: data,
+                ),
+                response.request!.url.path);
+
             return ResponseModel(
                 statusCode: response.statusCode.toString(),
                 isSuccess: false,
@@ -103,18 +107,17 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
           return response.bodyBytes;
       }
     } catch (e) {
-      printError('Url: ${response.request!.url}');
-      printError('StatusCode: ${response.statusCode}');
-      printError('Error: ${e.toString()}');
+      ApiFailure().call(
+          ResponseModel(
+              statusCode: response.statusCode.toString(),
+              message: e.toString()),
+          response.request!.url.path);
+
       return ResponseModel(
           isSuccess: false,
           statusCode: response.statusCode.toString(),
           data: null,
           message: "خطایی در عملیات رخ داده است");
     }
-  }
-
-  void printError(String text) {
-    debugPrint('\x1B[31m$text\x1B[0m');
   }
 }
