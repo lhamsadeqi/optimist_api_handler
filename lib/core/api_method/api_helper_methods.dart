@@ -58,7 +58,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
   String urlGenerator(
       String url, List<QueryModel>? query, String? pathVariable) {
     if (pathVariable != null) url += "/$pathVariable";
-    if (pathVariable != null) url += generateQuery(query!);
+    if (query != null) url += generateQuery(query);
 
     return url;
   }
