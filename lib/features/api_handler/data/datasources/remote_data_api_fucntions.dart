@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:api_handler/core/api_method/api_helper_methods.dart';
 import 'package:api_handler/core/network/network_info.dart';
 
@@ -71,7 +73,7 @@ class RemoteDataApiFuncImpl extends RemoteDataApiFunc {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseType, response);
       } catch (e) {
-        ApiFailure().call(ResponseModel(message: e.toString()), url);
+        ApiFailure(ResponseModel(message: e.toString()), url);
 
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
 
@@ -122,7 +124,7 @@ class RemoteDataApiFuncImpl extends RemoteDataApiFunc {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseType, response);
       } catch (e) {
-        ApiFailure().call(ResponseModel(message: e.toString()), url);
+        ApiFailure(ResponseModel(message: e.toString()), url);
 
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
         await networkInfo.isConnected.then((value) {
@@ -174,7 +176,7 @@ class RemoteDataApiFuncImpl extends RemoteDataApiFunc {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseType, response);
       } catch (e) {
-        ApiFailure().call(ResponseModel(message: e.toString()), url);
+        ApiFailure(ResponseModel(message: e.toString()), url);
 
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
 
@@ -227,7 +229,7 @@ class RemoteDataApiFuncImpl extends RemoteDataApiFunc {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseType, response);
       } catch (e) {
-        ApiFailure().call(ResponseModel(message: e.toString()), url);
+        ApiFailure(ResponseModel(message: e.toString()), url);
 
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
 

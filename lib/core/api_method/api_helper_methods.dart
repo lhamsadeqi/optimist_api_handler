@@ -65,7 +65,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
 
   responseGetter<T>(ResponseEnum typeEnum, http.Response response) {
     if (response.statusCode != 200) {
-      ApiFailure().call(
+      ApiFailure(
           ResponseModel(statusCode: response.statusCode.toString()),
           response.request!.url.path);
     }
@@ -79,7 +79,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
           if (!result.isSuccess ||
               (result.statusCode != '200' && result.statusCode != 'success') ||
               result.data == null) {
-            ApiFailure().call(
+            ApiFailure(
                 ResponseModel(
                   statusCode: result.statusCode,
                   isSuccess: result.isSuccess,
@@ -89,7 +89,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
                 response.request!.url.path);
           }
           if (data.isEmpty) {
-            ApiFailure().call(
+            ApiFailure(
                 ResponseModel(
                   data: data,
                 ),
@@ -107,7 +107,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
           return response.bodyBytes;
       }
     } catch (e) {
-      ApiFailure().call(
+      ApiFailure(
           ResponseModel(
               statusCode: response.statusCode.toString(),
               message: e.toString()),
