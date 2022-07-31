@@ -21,6 +21,9 @@ class APIHandler {
     _token.setToken = token;
   }
 
+  /// get Token if exists
+  String? get token => Token().token;
+
   /// calls a 'Get' API and returns a `ResponseModel`.
   Future<ResponseModel> get(
     String url, {
