@@ -15,6 +15,13 @@ class APIHandler {
   final PutApi _putApi = PutApi();
   final DeleteApi _deleteApi = DeleteApi();
 
+  static Function? _onTokenExpired;
+
+  /// this method is called when the token is expired.
+  onTokenExpired(Function _onTokenExp) {
+    _onTokenExpired = _onTokenExp;
+  }
+
   /// sets Token to use bearer header in APIs.
   setToken(String? token) {
     Token _token = Token();
@@ -32,13 +39,17 @@ class APIHandler {
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
-    return await _getApi(GetApiData(
+    ResponseModel responseModel = await _getApi(GetApiData(
       url,
       queries: queries,
       pathVars: pathVariable,
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
+    if (_onTokenExpired != null && responseModel.statusCode == '401') {
+      _onTokenExpired!();
+    }
+    return responseModel;
   }
 
   /// calls a 'Post' API and returns a `ResponseModel`.
@@ -50,7 +61,7 @@ class APIHandler {
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
-    return _postApi(PostApiData(
+    ResponseModel responseModel = await _postApi(PostApiData(
       url,
       queries: queries,
       pathVars: pathVariable,
@@ -58,6 +69,10 @@ class APIHandler {
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
+    if (_onTokenExpired != null && responseModel.statusCode == '401') {
+      _onTokenExpired!();
+    }
+    return responseModel;
   }
 
   /// calls a 'put' API and returns a `ResponseModel`.
@@ -69,7 +84,7 @@ class APIHandler {
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
-    return _putApi(PutApiData(
+    ResponseModel responseModel = await _putApi(PutApiData(
       url,
       queries: queries,
       pathVars: pathVariable,
@@ -77,6 +92,10 @@ class APIHandler {
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
+    if (_onTokenExpired != null && responseModel.statusCode == '401') {
+      _onTokenExpired!();
+    }
+    return responseModel;
   }
 
   /// calls a 'delete' API and returns a `ResponseModel`.
@@ -88,7 +107,7 @@ class APIHandler {
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
-    return _deleteApi(DeleteApiData(
+    ResponseModel responseModel = await _deleteApi(DeleteApiData(
       url,
       queries: queries,
       pathVars: pathVariable,
@@ -96,5 +115,9 @@ class APIHandler {
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
+    if (_onTokenExpired != null && responseModel.statusCode == '401') {
+      _onTokenExpired!();
+    }
+    return responseModel;
   }
 }
