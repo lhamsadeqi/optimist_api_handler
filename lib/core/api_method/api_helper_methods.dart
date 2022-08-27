@@ -65,8 +65,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
 
   responseGetter<T>(ResponseEnum typeEnum, http.Response response) {
     if (response.statusCode != 200) {
-      ApiFailure(
-          ResponseModel(statusCode: response.statusCode.toString()),
+      ApiFailure(ResponseModel(statusCode: response.statusCode.toString()),
           response.request!.url.path);
     }
     try {
@@ -77,7 +76,8 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
             json.decode(data),
           );
           if (!result.isSuccess ||
-              (result.statusCode != '200' && result.statusCode != 'success') ||
+              (result.statusCode != '200' &&
+                  result.statusCode.toLowerCase() != 'success') ||
               result.data == null) {
             ApiFailure(
                 ResponseModel(
