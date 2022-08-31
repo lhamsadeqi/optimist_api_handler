@@ -12,7 +12,7 @@ class ResponseModel {
   });
 
   ResponseModel fromJson(dynamic json) {
-    statusCode = json["statusCode"].toString();
+    statusCode = json["statusCode"].toLowerCase().toString();
     data = json["data"];
     isSuccess = json["isSuccess"];
     message = json["message"].toString();
