@@ -12,13 +12,13 @@ class ResponseModel {
   });
 
   ResponseModel fromJson(dynamic json) {
-    statusCode = json["statusCode"].toLowerCase().toString();
+    statusCode = json["statusCode"] == null
+        ? '200'
+        : json["statusCode"].toLowerCase().toString();
     data = json["data"];
-    isSuccess = json["isSuccess"];
-    message = json["message"].toString();
+    isSuccess = json["isSuccess"] == null ? true : json["isSuccess"];
+    message = json["message"] == null ? '' : json["message"].toString();
 
     return this;
   }
 }
-
-
